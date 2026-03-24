@@ -9,6 +9,7 @@ from discord import Colour, Embed
 from ..interface import Block
 from ..interpreter import Context
 from .helpers import helper_split, easier_helper_split, implicit_bool
+from ..utils import truncate
 from ..exceptions import BadColourArgument, EmbedParseError
 from .._warnings import removal
 
@@ -70,16 +71,30 @@ def add_field(embed: Embed, _: str, payload: str) -> None:
     except ValueError:
         name, value = cast(List[str], helper_split(payload, 2))  # type: ignore
         inline = False
+    name = truncate(name, max=FIELD_LIMITS["field.name"])
+    value = truncate(value, max=FIELD_LIMITS["field.value"])
     embed.add_field(name=name, value=value, inline=inline)
 
 
 def set_footer(embed: Embed, _: str, payload: str) -> None:
     data = easier_helper_split(payload, maxsplit=2)  # type: ignore
     if data is None:
-        embed.set_footer(text=payload)
+        embed.set_footer(text=truncate(payload, max=FIELD_LIMITS["footer.text"]))
     else:
         text, icon_url = data
-        embed.set_footer(text=text, icon_url=icon_url)
+        embed.set_footer(text=truncate(text, max=FIELD_LIMITS["footer.text"]), icon_url=icon_url)
+
+
+# Discord embed field character limits
+# https://discord.com/developers/docs/resources/channel#embed-object-embed-limits
+FIELD_LIMITS: Dict[str, int] = {
+    "title": 256,
+    "description": 4096,
+    "footer.text": 2048,
+    "author.name": 256,
+    "field.name": 256,
+    "field.value": 1024,
+}
 
 
 class EmbedBlock(Block):
@@ -223,16 +238,39 @@ class EmbedBlock(Block):
         else:
             if color := self.value_to_color(color):
                 embed.color = color
+            self._truncate_embed_fields(embed)
             return embed
 
     @classmethod
     def update_embed(cls, embed: Embed, attribute: str, value: str) -> Embed:
+        # Truncate value to Discord's per-field limit before setting
+        if attribute in FIELD_LIMITS:
+            value = truncate(value, max=FIELD_LIMITS[attribute])
         handler = cls.ATTRIBUTE_HANDLERS[attribute]
         try:
             handler(embed, attribute, value)
         except Exception as error:
             raise EmbedParseError(error) from error
         return embed
+
+    @staticmethod
+    def _truncate_embed_fields(embed: Embed) -> None:
+        """Truncate embed fields to Discord's per-field character limits."""
+        if embed.title and len(embed.title) > FIELD_LIMITS["title"]:
+            embed.title = truncate(embed.title, max=FIELD_LIMITS["title"])
+        if embed.description and len(embed.description) > FIELD_LIMITS["description"]:
+            embed.description = truncate(embed.description, max=FIELD_LIMITS["description"])
+        if embed.footer and embed.footer.text and len(embed.footer.text) > FIELD_LIMITS["footer.text"]:
+            embed.set_footer(text=truncate(embed.footer.text, max=FIELD_LIMITS["footer.text"]), icon_url=embed.footer.icon_url)
+        if embed.author and embed.author.name and len(embed.author.name) > FIELD_LIMITS["author.name"]:
+            embed.set_author(name=truncate(embed.author.name, max=FIELD_LIMITS["author.name"]), url=embed.author.url, icon_url=embed.author.icon_url)
+        for field in embed.fields:
+            if field.name and len(field.name) > FIELD_LIMITS["field.name"]:
+                idx = embed.fields.index(field)
+                embed.set_field_at(idx, name=truncate(field.name, max=FIELD_LIMITS["field.name"]), value=field.value, inline=field.inline)
+            if field.value and len(field.value) > FIELD_LIMITS["field.value"]:
+                idx = embed.fields.index(field)
+                embed.set_field_at(idx, name=field.name, value=truncate(field.value, max=FIELD_LIMITS["field.value"]), inline=field.inline)
 
     @staticmethod
     def return_error(error: Exception) -> str:
