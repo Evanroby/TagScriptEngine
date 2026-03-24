@@ -208,7 +208,7 @@ class _Interpreter(Protocol):
         response: Response,
         *,
         charlimit: int,
-        verb_limit: int = 10000,
+        verb_limit: int = 6000,
         dot_parameter: bool,
     ) -> str: ...
 
@@ -320,7 +320,7 @@ class Interpreter(_Interpreter):
         response: Response,
         *,
         charlimit: int,
-        verb_limit: int = 2000,
+        verb_limit: int = 6000,
         dot_parameter: bool,
     ) -> str:
         final = message
@@ -442,7 +442,7 @@ class AsyncInterpreter(Interpreter):
         response: Response,
         *,
         charlimit: int,
-        verb_limit: int = 10000,
+        verb_limit: int = 6000,
         dot_parameter: bool,
     ) -> str:
         final = message
