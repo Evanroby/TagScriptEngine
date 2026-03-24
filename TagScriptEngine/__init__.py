@@ -170,7 +170,7 @@ __all__: Tuple[str, ...] = (
 )
 
 
-__version__: Final[str] = "3.2.2"
+__version__: Final[str] = "3.2.3"
 
 
 class VersionNamedTuple(NamedTuple):
