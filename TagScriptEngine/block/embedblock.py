@@ -86,7 +86,7 @@ def set_footer(embed: Embed, _: str, payload: str) -> None:
 
 
 # Discord embed field character limits
-# https://discord.com/developers/docs/resources/channel#embed-object-embed-limits
+# https://docs.discord.com/developers/resources/message#embed-object-embed-limits
 FIELD_LIMITS: Dict[str, int] = {
     "title": 256,
     "description": 4096,
