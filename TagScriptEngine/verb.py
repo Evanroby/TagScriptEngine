@@ -7,7 +7,7 @@ __all__: Tuple[str, ...] = ("Verb",)
 
 class _Verb(Protocol):
     def __init__(
-        self, verb_string: Optional[str] = None, *, limit: int = 10000, dot_parameter: bool = False
+        self, verb_string: Optional[str] = None, *, limit: int = 2000, dot_parameter: bool = False
     ) -> None: ...
 
     def __parse(self, verb_string: str, limit: int) -> None: ...
@@ -68,7 +68,7 @@ class Verb(_Verb):
     )
 
     def __init__(
-        self, verb_string: Optional[str] = None, *, limit: int = 10000, dot_parameter: bool = False
+        self, verb_string: Optional[str] = None, *, limit: int = 2000, dot_parameter: bool = False
     ) -> None:
         self.declaration: Optional[str] = None
         self.parameter: Optional[str] = None
