@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath(".."))
 
 # -- Project information -----------------------------------------------------
 
-project = "AdvancedTagScriptEngine"
+project = "AdvancedTagScript"
 copyright = "2021, JonSnowbd, PhenoM4n4n, inthedark.org, cool-aid-man"
 author = "JonSnowbd, PhenoM4n4n, inthedark.org, cool-aid-man"
 
@@ -56,7 +56,7 @@ html_theme = "sphinx_rtd_theme"
 # html_favicon = "_static/favicon.ico"
 # html_theme_options = {
 #     "external_links": [
-#         ("Github", "https://github.com/japandotorg/AdvancedTagScriptEngine"),
+#         ("Github", "https://github.com/cool-aid-man/TagScriptEngine"),
 #         ("Discord", "https://discord.gg/AyMrA7KMSp"),
 #     ]
 # }

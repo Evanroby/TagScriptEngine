@@ -1,15 +1,15 @@
 ## Information
-<a href="https://pypi.python.org/pypi/AdvancedTagscriptEngine/">
-    <img src="https://img.shields.io/pypi/pyversions/AdvancedTagscriptEngine" alt="AdvancedTagScriptEngine" />
+<a href="https://pypi.python.org/pypi/AdvancedTagScript/">
+    <img src="https://img.shields.io/pypi/pyversions/AdvancedTagScript" alt="AdvancedTagScript" />
 </a>
-<a href="https://pypi.python.org/pypi/AdvancedTagscriptEngine/">
-    <img src="https://img.shields.io/pypi/v/AdvancedTagScriptEngine" alt="PyPI - Version">
+<a href="https://pypi.python.org/pypi/AdvancedTagScript/">
+    <img src="https://img.shields.io/pypi/v/AdvancedTagScript" alt="PyPI - Version">
 </a>
 <a href="https://advancedtagscript.readthedocs.io/en/latest/?badge=latest">
     <img src="https://readthedocs.org/projects/tagscriptengine/badge/?version=latest" alt="Documentation Status" />
 </a>
-<a href="https://pypi.python.org/pypi/AdvancedTagscriptEngine/">
-    <img src="https://img.shields.io/pypi/dm/AdvancedTagScriptEngine" alt="PyPI - Downloads" />
+<a href="https://pypi.python.org/pypi/AdvancedTagScript/">
+    <img src="https://img.shields.io/pypi/dm/AdvancedTagScript" alt="PyPI - Downloads" />
 
 </a>
 
@@ -28,7 +28,7 @@ Additional documentation on the TagScriptEngine library can be [found here](http
 Download the latest version through pip:
 
 ```
-pip(3) install AdvancedTagScriptEngine
+pip(3) install AdvancedTagScript
 ```
 
 Download from a commit:
@@ -46,7 +46,7 @@ pip(3) install -e ./TagScriptEngine
 
 ## What?
 
-AdvancedTagScriptEngine is a drop in easy to use string interpreter that lets you provide users with ways of
+AdvancedTagScript is a drop in easy to use string interpreter that lets you provide users with ways of
 customizing their profiles or chat rooms with interactive text.
 
 For example TagScript comes out of the box with a random block that would let users provide

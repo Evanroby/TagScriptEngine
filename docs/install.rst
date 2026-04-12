@@ -1,8 +1,8 @@
 .. meta::
-    :description: How to install AdvancedTagScriptEngine using pip, from source or git repository
-    :keywords: python, advancedtagscriptengine, tagscriptengine, tagscript, install
+    :description: How to install AdvancedTagScript using pip, from source or git repository
+    :keywords: python, advancedtagscript, tagscriptengine, tagscript, install
 
-.. title:: AdvancedTagScriptEngine installation options
+.. title:: AdvancedTagScript installation options
 
 
 ==========
@@ -15,15 +15,15 @@ pip
 
 `package <https://pip.pypa.io/>`_::
 
-    $ pip install AdvancedTagScriptEngine
+    $ pip install AdvancedTagScript
 
-Latest version of `AdvancedTagScriptEngine` supports only python3.
+Latest version of `AdvancedTagScript` supports only python3.
 
 
 Source
 ^^^^^^
 
-Download `source <http://pypi.python.org/pypi/AdvancedTagScriptEngine>`_::
+Download `source <http://pypi.python.org/pypi/AdvancedTagScript>`_::
 
     $ pip install -e .
 
