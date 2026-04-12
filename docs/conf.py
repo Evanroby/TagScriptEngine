@@ -19,8 +19,8 @@ sys.path.insert(0, os.path.abspath(".."))
 # -- Project information -----------------------------------------------------
 
 project = "AdvancedTagScriptEngine"
-copyright = "2021, JonSnowbd, PhenoM4n4n & inthedark.org"
-author = "JonSnowbd, PhenoM4n4n & inthedark.org"
+copyright = "2021, JonSnowbd, PhenoM4n4n, inthedark.org, cool-aid-man"
+author = "JonSnowbd, PhenoM4n4n, inthedark.org, cool-aid-man"
 
 
 # -- General configuration ---------------------------------------------------
@@ -51,14 +51,11 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 
-html_theme = "press"
+html_theme = "sphinx_rtd_theme"
 html_logo = "_static/logo.png"
 html_favicon = "_static/favicon.ico"
 html_theme_options = {
-    "external_links": [
-        ("Github", "https://github.com/japandotorg/AdvancedTagScriptEngine"),
-        ("Discord", "https://discord.gg/AyMrA7KMSp"),
-    ]
+    "navigation_depth": 4,
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,

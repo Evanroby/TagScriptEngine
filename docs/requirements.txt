@@ -2,6 +2,8 @@ discord.py
 Jinja2<3.1
 recommonmark
 Sphinx
+Sphinx<8
+sphinx_rtd_theme
 sphinx-book-theme
 sphinx-material
 sphinx-press-theme
