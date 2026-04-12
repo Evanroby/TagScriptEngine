@@ -5,7 +5,7 @@
 <a href="https://pypi.python.org/pypi/AdvancedTagscriptEngine/">
     <img src="https://img.shields.io/pypi/v/AdvancedTagScriptEngine" alt="PyPI - Version">
 </a>
-<a href="https://tagscriptengine.readthedocs.io/en/latest/?badge=latest">
+<a href="https://advancedtagscript.readthedocs.io/en/latest/?badge=latest">
     <img src="https://readthedocs.org/projects/tagscriptengine/badge/?version=latest" alt="Documentation Status" />
 </a>
 <a href="https://pypi.python.org/pypi/AdvancedTagscriptEngine/">
@@ -18,10 +18,10 @@ This fork adds support for Discord object adapters and a couple Discord related 
 well as multiple utility blocks. Additionally, several tweaks have been made to the engine's
 behavior.
 
-This TagScriptEngine is used on [MELON, a Discord bot](https://melonbot.io/invite).
-An example implementation can be found in the [Tags cog](https://github.com/japandotorg/Seina-Cogs/tree/main/tags).
+This TagScriptEngine is used on [Dusky, a Discord bot](https://duskybot.xyz/invite).
+An example implementation can be found in the [Tags cog](https://github.com/cool-aid-man/cool-cogs/tree/main/tags).
 
-Additional documentation on the TagScriptEngine library can be [found here](https://tagscriptengine.readthedocs.io/en/latest/).
+Additional documentation on the TagScriptEngine library can be [found here](https://advancedtagscript.readthedocs.io/en/latest/).
 
 ## Installation
 
@@ -34,13 +34,13 @@ pip(3) install AdvancedTagScriptEngine
 Download from a commit:
 
 ```
-pip(3) install git+https://github.com/japandotorg/TagScriptEngine.git@<COMMIT_HASH>
+pip(3) install git+https://github.com/cool-aid-man/TagScriptEngine.git@<COMMIT_HASH>
 ```
 
 Install for editing/development:
 
 ```
-git clone https://github.com/japandotorg/TagScriptEngine.git
+git clone https://github.com/cool-aid-man/TagScriptEngine.git
 pip(3) install -e ./TagScriptEngine
 ```
 

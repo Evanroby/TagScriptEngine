@@ -2,6 +2,12 @@
 Blocks
 ======
 
+----------------------
+Allowed Mentions Block
+----------------------
+
+.. autoclass:: TagScriptEngine.block.AllowedMentionsBlock
+
 ---------
 All Block
 ---------

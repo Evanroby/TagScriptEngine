@@ -4,7 +4,8 @@ Credits
 
 Thank you to the following users who contributed to this documentation!
 
-* **japandotorg** ``inthedark.org```
-* **PhenoM4n4n** ``phenom4n4n``
-* **sravan** ``sravan#0001``
+* **cool-aid-man** ``coolaidman.``
+* **japandotorg** ``japan.org``
+* **PhenoM4n4n** ``phenomanan``
 * **Anik** ``aniksarker_21``
+* **sravan** ``sravan._``

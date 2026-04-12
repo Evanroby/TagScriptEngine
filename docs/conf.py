@@ -52,11 +52,14 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # a list of builtin themes.
 
 html_theme = "sphinx_rtd_theme"
-html_logo = "_static/logo.png"
-html_favicon = "_static/favicon.ico"
-html_theme_options = {
-    "navigation_depth": 4,
-}
+# html_logo = "_static/logo.png"
+# html_favicon = "_static/favicon.ico"
+# html_theme_options = {
+#     "external_links": [
+#         ("Github", "https://github.com/japandotorg/AdvancedTagScriptEngine"),
+#         ("Discord", "https://discord.gg/AyMrA7KMSp"),
+#     ]
+# }
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -66,6 +69,7 @@ html_static_path = ["_static"]
 # autodoc
 autodoc_default_options = {"show-inheritance": True}
 autodoc_member_order = "bysource"
+autodoc_mock_imports = ["redbot", "redbot.core", "redbot.core.bot", "redbot.core.commands", "redbot.core.utils.chat_formatting"]
 
 # simple references within backticks
 default_role = "any"

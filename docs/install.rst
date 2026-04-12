@@ -33,4 +33,4 @@ Git Repository
 
 Get latest development version::
 
-    $ git clone https://github.com/japandotorg/TagScriptEngine.git
+    $ git clone https://github.com/cool-aid-man/TagScriptEngine.git
