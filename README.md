@@ -6,7 +6,7 @@
     <img src="https://img.shields.io/pypi/v/AdvancedTagScript" alt="PyPI - Version">
 </a>
 <a href="https://advancedtagscript.readthedocs.io/en/latest/?badge=latest">
-    <img src="https://readthedocs.org/projects/tagscriptengine/badge/?version=latest" alt="Documentation Status" />
+    <img src="https://readthedocs.org/projects/AdvancedTagScript/badge/?version=latest" alt="Documentation Status" />
 </a>
 <a href="https://pypi.python.org/pypi/AdvancedTagScript/">
     <img src="https://img.shields.io/pypi/dm/AdvancedTagScript" alt="PyPI - Downloads" />
