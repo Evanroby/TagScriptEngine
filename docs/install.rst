@@ -23,7 +23,7 @@ Latest version of `AdvancedTagScript` supports only python3.
 Source
 ^^^^^^
 
-Download `source <http://pypi.python.org/pypi/AdvancedTagScript>`_::
+Download `source <https://pypi.org/project/AdvancedTagScript/>`_::
 
     $ pip install -e .
 

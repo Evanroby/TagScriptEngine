@@ -145,3 +145,45 @@ URL Encode Block
 ----------------
 
 .. autoclass:: TagScriptEngine.block.URLEncodeBlock
+
+-----------
+Upper Block
+-----------
+
+.. autoclass:: TagScriptEngine.block.UpperBlock
+
+-----------
+Lower Block
+-----------
+
+.. autoclass:: TagScriptEngine.block.LowerBlock
+
+-----------
+Count Block
+-----------
+
+.. autoclass:: TagScriptEngine.block.CountBlock
+
+-----------
+Length Block
+-----------
+
+.. autoclass:: TagScriptEngine.block.LengthBlock
+
+--------------
+Comment Block
+--------------
+
+.. autoclass:: TagScriptEngine.block.CommentBlock
+
+----------
+Stop Block
+----------
+
+.. autoclass:: TagScriptEngine.block.StopBlock
+
+--------------
+Python Block
+--------------
+
+.. autoclass:: TagScriptEngine.block.PythonBlock

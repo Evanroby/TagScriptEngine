@@ -11,25 +11,35 @@ __all__: Tuple[str, ...] = ("CountBlock", "LengthBlock")
 
 class CountBlock(verb_required_block(True, payload=True)):  # type: ignore
     """
-    The count block will count how much of text is in message.
-    This is case sensitive and will include substrings, if you
-    don't provide a parameter, it will count the spaces in the
-    message.
+    The count block counts occurrences of a substring within a message.
+    The search is case sensitive and includes overlapping substrings.
+
+    A payload (the message to search in) is **required**. Optionally,
+    pass the text to search for as a parameter. If no parameter is
+    provided, the block counts the number of words in the message
+    (spaces + 1).
 
     **Usage:** ``{count([text]):<message>}``
 
     **Aliases:** ``None``
 
-    **Payload:** ``message``
+    **Payload:** ``message`` (required)
 
-    **Parameter:** text
+    **Parameter:** ``text`` (optional, the substring to count)
 
-    .. tagscript::
+    **Examples:** ::
+
         {count(Tag):TagScriptEngine}
         # 1
 
-        {count(Tag): Tag Script Engine TagScriptEngine}
+        {count(Tag):Tag Script Engine TagScriptEngine}
         # 2
+
+        {count:hello world}
+        # 2 (word count: 1 space + 1)
+
+        {count(123)}
+        # Returns {count(123)} — rejected because no payload was provided
     """
 
     ACCEPTED_NAMES: Tuple[str, ...] = ("count",)
@@ -38,28 +48,28 @@ class CountBlock(verb_required_block(True, payload=True)):  # type: ignore
         if ctx.verb.parameter:
             payload: str = cast(str, ctx.verb.payload)
             return str(payload.count(ctx.verb.parameter))
-        return str(len(cast(str, ctx.verb.payload)) + 1)
+        return str(cast(str, ctx.verb.payload).count(" ") + 1)
 
 
-class LengthBlock(verb_required_block(True, payload=True)):  # type: ignore
+class LengthBlock(verb_required_block(True, parameter=True)):  # type: ignore
     """
-    The length block will check the length of the given String.
-    If a parameter is passed in, the block will check the length
-    based on what you passed in, w for word, s for spaces.
-    If you provide an invalid parameter, the block will return -1.
+    The length block returns the character count of the given text.
 
     **Usage:** ``{length(<text>)}``
 
     **Aliases:** ``len``
 
-    **Payload:** None
+    **Payload:** ``None``
 
-    **Parameter:** ``text``
+    **Parameter:** ``text`` (required)
 
-    .. tagscript::
+    **Examples:** ::
 
-        {len("TagScriptEngine")}
-        15
+        {len(TagScriptEngine)}
+        # 15
+
+        {len(hello world)}
+        # 11
     """
 
     ACCEPTED_NAMES: Tuple[str, ...] = ("length", "len")

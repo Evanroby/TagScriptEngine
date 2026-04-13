@@ -24,7 +24,7 @@ class StopBlock(verb_required_block(True, parameter=True)):  # type: ignore
 
     **Parameter:** bool
 
-    **Example:** ::
+    **Examples:** ::
 
         {stop({args}==):You must provide arguments for this tag.}
         # enforces providing arguments for a tag

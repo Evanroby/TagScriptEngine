@@ -12,7 +12,7 @@ __all__: Tuple[str, ...] = ("UpperBlock", "LowerBlock")
 class UpperBlock(Block):
     """Converts the given text to uppercase.
 
-    **Usage:**  ``{upper([text]))}``
+    **Usage:**  ``{upper([text])}``
 
     **Aliases:**  ``uppercase, upper``
 
@@ -22,10 +22,10 @@ class UpperBlock(Block):
 
     **Examples:**  ::
 
-        The text is {lower(ThIs Is A TeXt)}!
+        The text is {upper(ThIs Is A TeXt)}!
         # The text is THIS IS A TEXT!
 
-        You have entered {lower({args})}!
+        You have entered {upper({args})}!
         # You have entered HELLO WORLD!
     """
 

@@ -30,8 +30,8 @@ class URLEncodeBlock(verb_required_block(True, payload=True)):  # type: ignore
 
         # the following tagscript can be used to search up tag blocks
         # assume {args} = "command block"
-        # <https://seina-cogs.readthedocs.io/en/latest/search.html?q={urlencode(+):{args}}&check_keywords=yes&area=default>
-        # <https://seina-cogs.readthedocs.io/en/latest/search.html?q=command+block&check_keywords=yes&area=default>
+        # <https://cool-cogs.readthedocs.io/en/latest/search.html?q={urlencode(+):{args}}&check_keywords=yes&area=default>
+        # <https://cool-cogs.readthedocs.io/en/latest/search.html?q=command+block&check_keywords=yes&area=default>
     """
 
     ACCEPTED_NAMES: Tuple[str, ...] = ("urlencode",)

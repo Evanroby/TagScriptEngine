@@ -53,16 +53,14 @@ class PythonBlock(verb_required_block(True, payload=True, parameter=True)):  # t
 
     The ``in`` alias checks if the parameter is anywhere in the payload.
 
-    ``contain`` strictly checks if the parameter is the payload, split by whitespace.
+    The ``contains`` alias strictly checks if the parameter is in the payload, split by whitespace.
 
-    ``index`` finds the location of the parameter in the payload, split by whitespace.
-    If the parameter string is not found in the payload, it returns 1.
-
-    index is used to return the value of the string form the given list of
+    The ``index`` alias finds the location/index of the parameter in the payload, split by whitespace.
+    If the parameter string is not found in the payload, it returns -1.
 
     **Usage:** ``{in(<string>):<payload>}``
 
-    **Aliases:** ``index``, ``contains``
+    **Aliases:** ``in``, ``contains``, ``index``
 
     **Payload:** payload
 
@@ -80,7 +78,7 @@ class PythonBlock(verb_required_block(True, payload=True, parameter=True)):  # t
         {contains(mute):How does it feel to be muted?}
         # false
         {contains(muted?):How does it feel to be muted?}
-        # false
+        # true
 
         {index(food):I love to eat food. everyone does.}
         # 4
