@@ -24,6 +24,7 @@ from .block import (
     helper_parse_if as helper_parse_if,
     helper_parse_list_if as helper_parse_list_if,
     helper_split as helper_split,
+    easier_helper_split as easier_helper_split,
     AllowedMentionsBlock as AllowedMentionsBlock,
     AllBlock as AllBlock,
     AnyBlock as AnyBlock,
@@ -55,6 +56,8 @@ from .block import (
     CountBlock as CountBlock,
     LengthBlock as LengthBlock,
     CooldownBlock as CooldownBlock,
+    JoinBlock as JoinBlock,
+
 )
 from .interface import (
     Adapter as Adapter,
@@ -97,6 +100,8 @@ __all__: Tuple[str, ...] = (
     "helper_parse_if",
     "helper_parse_list_if",
     "helper_split",
+    "easier_helper_split",
+    "AllowedMentionsBlock",
     "AllBlock",
     "AnyBlock",
     "AssignmentBlock",
@@ -127,6 +132,8 @@ __all__: Tuple[str, ...] = (
     "LowerBlock",
     "CountBlock",
     "LengthBlock",
+    "JoinBlock",
+
     "SafeObjectAdapter",
     "StringAdapter",
     "IntAdapter",

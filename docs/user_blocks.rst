@@ -164,17 +164,11 @@ Count Block
 
 .. autoclass:: TagScriptEngine.block.CountBlock
 
------------
+------------
 Length Block
------------
+------------
 
 .. autoclass:: TagScriptEngine.block.LengthBlock
-
---------------
-Comment Block
---------------
-
-.. autoclass:: TagScriptEngine.block.CommentBlock
 
 ----------
 Stop Block
@@ -187,3 +181,9 @@ Python Block
 --------------
 
 .. autoclass:: TagScriptEngine.block.PythonBlock
+
+----------
+Join Block
+----------
+
+.. autoclass:: TagScriptEngine.block.JoinBlock

@@ -78,5 +78,5 @@ default_role = "any"
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
     "dpy": ("https://discordpy.readthedocs.io/en/stable/", None),
-    "red": ("https://docs.discord.red/en/stable/index.html", None),
+    "red": ("https://docs.discord.red/en/stable/", None),
 }

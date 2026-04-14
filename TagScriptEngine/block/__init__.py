@@ -89,6 +89,9 @@ from .count import (
     CountBlock as CountBlock,
     LengthBlock as LengthBlock,
 )
+from .joinblock import (
+    JoinBlock as JoinBlock,
+)
 
 __all__: Tuple[str, ...] = (
     "implicit_bool",
@@ -127,4 +130,5 @@ __all__: Tuple[str, ...] = (
     "LowerBlock",
     "CountBlock",
     "LengthBlock",
+    "JoinBlock",
 )

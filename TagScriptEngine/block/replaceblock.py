@@ -58,6 +58,11 @@ class PythonBlock(verb_required_block(True, payload=True, parameter=True)):  # t
     The ``index`` alias finds the location/index of the parameter in the payload, split by whitespace.
     If the parameter string is not found in the payload, it returns -1.
 
+    .. note::
+
+        Both ``contains`` and ``index`` perform **exact** matching on whitespace-split words.
+        For example, ``food`` will **not** match ``food.`` (with trailing punctuation).
+
     **Usage:** ``{in(<string>):<payload>}``
 
     **Aliases:** ``in``, ``contains``, ``index``
@@ -81,9 +86,13 @@ class PythonBlock(verb_required_block(True, payload=True, parameter=True)):  # t
         # true
 
         {index(food):I love to eat food. everyone does.}
-        # 4
-        {index(pie):I love to eat food. everyone does.}
-        # -1
+        # -1 # because of the period. "food" != "food."
+        {index(food):I love to eat food everyone does}
+        # 4 # because "food" is the 4th word in the payload
+        {index(love):I love to eat food}
+        # 1 # because "love" is the 2nd word in the payload
+        {index(pie):I love to eat food}
+        # -1 # because "pie" is not in the payload
     """
 
     def will_accept(self, ctx: Context) -> bool:  # type: ignore
