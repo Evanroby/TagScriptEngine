@@ -25,6 +25,7 @@ class UpperBlock(Block):
         The text is {upper(ThIs Is A TeXt)}!
         # The text is THIS IS A TEXT!
 
+        {=(args):Hello World}
         You have entered {upper({args})}!
         # You have entered HELLO WORLD!
     """
@@ -52,6 +53,7 @@ class LowerBlock(Block):
         The text is {lower(ThIs Is A TeXt)}!
         # The text is this is a text!
 
+        {=(args):HELLO WORLD}
         You have entered {lower({args})}!
         # You have entered hello world!
     """

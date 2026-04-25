@@ -28,6 +28,9 @@ class CooldownBlock(verb_required_block(True, payload=True, parameter=True)):  #
     cooldown is exceeded. If no message is passed, the default message will be sent instead.
     The cooldown message supports 2 blocks: ``key`` and ``retry_after``.
 
+    .. note::
+        - Delimiter for the parameter (``<rate>`` and ``<per>``): ``|`` or ``~``. Where ``|`` takes priority over ``~``.
+
     **Usage:** ``{cooldown(<rate>|<per>):<key>|[message]}``
 
     **Payload:** key, message

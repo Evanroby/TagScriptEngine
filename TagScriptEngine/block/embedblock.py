@@ -8,10 +8,9 @@ from discord import Colour, Embed
 
 from ..interface import Block
 from ..interpreter import Context
-from .helpers import helper_split, easier_helper_split, implicit_bool
+from .helpers import helper_split, implicit_bool
 from ..utils import truncate
 from ..exceptions import BadColourArgument, EmbedParseError
-from .._warnings import removal
 
 try:
     import orjson  # noqa: F401
@@ -59,8 +58,10 @@ def set_dynamic_url(embed: Embed, attribute: str, value: str) -> None:
 
 
 def add_field(embed: Embed, _: str, payload: str) -> None:
-    if (data := easier_helper_split(payload, maxsplit=3)) is None:  # type: ignore
-        raise EmbedParseError("`add_field` payload was not split by |")
+    if (data := helper_split(payload, maxsplit=2, double_semicolon=True)) is None:  # type: ignore
+        raise EmbedParseError(
+            "`add_field` payload was not split by `;;` (double semicolon), `|` (pipe), or `~` (tilde)"
+        )
     try:
         name, value, _inline = data
         inline = implicit_bool(_inline)
@@ -69,7 +70,10 @@ def add_field(embed: Embed, _: str, payload: str) -> None:
                 "`inline` argument for `add_field` is not a boolean value (_inline)"
             )
     except ValueError:
-        name, value = cast(List[str], helper_split(payload, 2))  # type: ignore
+        name, value = cast(
+            List[str],
+            helper_split(payload, maxsplit=1, double_semicolon=True),
+        )
         inline = False
     name = truncate(name, max=FIELD_LIMITS["field.name"])
     value = truncate(value, max=FIELD_LIMITS["field.value"])
@@ -77,12 +81,21 @@ def add_field(embed: Embed, _: str, payload: str) -> None:
 
 
 def set_footer(embed: Embed, _: str, payload: str) -> None:
-    data = easier_helper_split(payload, maxsplit=2)  # type: ignore
+    data = helper_split(payload, maxsplit=1, double_semicolon=True)  # type: ignore
     if data is None:
         embed.set_footer(text=truncate(payload, max=FIELD_LIMITS["footer.text"]))
     else:
         text, icon_url = data
         embed.set_footer(text=truncate(text, max=FIELD_LIMITS["footer.text"]), icon_url=icon_url)
+
+
+def set_author(embed: Embed, _: str, payload: str) -> None:
+    data = helper_split(payload, maxsplit=1, double_semicolon=True)  # type: ignore
+    if data is None:
+        embed.set_author(name=truncate(payload, max=FIELD_LIMITS["author.name"]))
+    else:
+        name, icon_url = data
+        embed.set_author(name=truncate(name, max=FIELD_LIMITS["author.name"]), icon_url=icon_url)
 
 
 # Discord embed field character limits
@@ -110,19 +123,41 @@ class EmbedBlock(Block):
     Multiple embed generators are available online to visualize and generate
     embed JSON.
 
+    .. important::
+        - `Embed Limits are: <https://docs.discord.com/developers/resources/message#embed-object-embed-limits>`_
+            - Title: 256 characters
+            - Description: 4096 characters
+            - Footer: 2048 characters
+            - Author: 256 characters
+            - Field name: 256 characters
+            - Field value: 1024 characters
+        - The total length of the embed must not exceed 6000 characters.
+
     **Usage:** ``{embed(<json>)}``
 
     **Payload:** None
 
     **Parameter:** json
 
-    **Examples:** ::
+    **Examples:** 
+    
+    .. code-block:: yaml
 
+        Example 1:
         {embed({"title":"Hello!", "description":"This is a test embed."})}
+
+        Example 2:
         {embed({
             "title":"Here's a random duck!",
             "image":{"url":"https://random-d.uk/api/randomimg"},
-            "color":15194415
+            "color":15194415,
+            "fields": [
+                {
+                    "name": "Fun Fact",
+                    "value": "Ducks are birds that are well-adapted to life in and around water.",
+                    "inline": false
+                }
+            ]
         })}
 
     **Manual**
@@ -135,11 +170,12 @@ class EmbedBlock(Block):
     *   ``url``
     *   ``thumbnail``
     *   ``image``
+    *   ``author``
     *   ``footer``
     *   ``field`` - (See below)
 
-    Adding a field to an embed requires the payload to be split by ``|``,
-    ``;`` or ``,`` into either 2 or 3 parts. The first part is the name
+    Adding a field to an embed requires the payload to be split by ``;;``,
+    ``|`` or ``~`` into either 2 or 3 parts. The first part is the name
     of the field, the  second is the text of the field, and the third
     optionally specifies  whether the field should be inline.
 
@@ -155,16 +191,22 @@ class EmbedBlock(Block):
         {embed(title):Rules}
         {embed(description):Follow these rules to ensure a good experience in our server!}
         {embed(field):Rule 1|Respect everyone you speak to.|false}
+        {embed(author):Mod Team|{author(avatar)}}
         {embed(footer):Thanks for reading!|{guild(icon)}}
 
     Both methods can be combined to create an embed in a tag.
     The following tagscript uses JSON to create an embed with fields and later
     set the embed title.
 
-    ::
+    .. caution::
+        - The ``JSON`` block acts as a base for the embed.
+        - Since blocks are processed in **order**, the ``JSON`` block **must** come **before** any manual attribute blocks.
+        - The manual attributes are used to ``modify`` or ``add`` to the embed created by the ``JSON`` block.
 
-        {embed(title):my embed title}
-        {embed({{
+    .. code-block:: yaml
+
+        {embed({
+            "description": "This is a test description.",
             "fields": [
                 {
                     "name": "Field 1",
@@ -173,6 +215,8 @@ class EmbedBlock(Block):
                 }
             ]
         })}
+        {embed(title):My embed title}
+
     """
 
     ACCEPTED_NAMES: Tuple[str, ...] = ("embed",)
@@ -186,22 +230,9 @@ class EmbedBlock(Block):
         "thumbnail": set_dynamic_url,
         "image": set_dynamic_url,
         "field": add_field,
+        "author": set_author,
         "footer": set_footer,
     }
-
-    @removal(
-        name="EmbedBlock",
-        reason=(
-            "One of EmbedBlock's trait is scheduled to be removed in the next minor release, "
-            "A minor exception handling which would restrict the embed from getting sent and "
-            "would raise TagScriptEngine.exceptions.EmbedParseError incase it had more than "
-            "6000 characters, to know more about the limitations of discord embeds refer to the "
-            "[Official Discord API Docs](https://discord.com/developers/docs/resources/channel#embed-object-embed-limits)."
-        ),
-        version="3.2.0",
-    )
-    def __init__(self) -> None:
-        super().__init__()
 
     @staticmethod
     def get_embed(ctx: Context) -> Embed:

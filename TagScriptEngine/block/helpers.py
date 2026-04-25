@@ -8,12 +8,10 @@ __all__: Tuple[str, ...] = (
     "implicit_bool",
     "helper_parse_if",
     "helper_split",
-    "easier_helper_split",
     "helper_parse_list_if",
 )
 
 SPLIT_REGEX: re.Pattern[str] = re.compile(r"(?<!\\)\|")
-EASIER_SPLIT_REGEX: re.Pattern[str] = re.compile(r"/[\~;]/")
 BOOL_LOOKUP: Dict[str, bool] = {
     "true": True,
     "false": False,
@@ -112,48 +110,29 @@ def helper_parse_if(string: str) -> Optional[bool]:
 
 
 def helper_split(
-    split_string: str, easy: bool = True, *, maxsplit: Optional[int] = None
+    split_string: str,
+    easy: bool = True,
+    *,
+    maxsplit: Optional[int] = None,
+    double_semicolon: bool = False,
 ) -> Optional[List[str]]:
     """
     A helper method to universalize the splitting logic used in multiple
     blocks and adapters. Please use this wherever a verb needs content to
-    be chopped at | , or ~!
+    be chopped at ``|`` or ``~``. Embed parsing can also opt into ``;;``
+    taking priority over the other delimiters.
 
     >>> helper_split("this, should|work")
     ["this, should", "work"]
     """
     args = (maxsplit,) if maxsplit is not None else ()
+    if double_semicolon and ";;" in split_string:
+        return split_string.split(";;", *args)
     if "|" in split_string:
         return SPLIT_REGEX.split(split_string, *args)
     if easy:
         if "~" in split_string:
             return split_string.split("~", *args)
-        if "," in split_string:
-            return split_string.split(",", *args)
-    return
-
-
-def easier_helper_split(
-    split_string: str, *, maxsplit: Optional[int] = None
-) -> Optional[List[str]]:
-    """
-    A helper method to universalize the splitting logic used in blocks
-    and adapters. Please use this wherever a verb needs content to be
-    chopped at `|`, `,` or `;`.
-
-    >>> easier_helper_split("this, should|work")
-    ["this, should", "work"]
-
-    >>> easier_helper_split("this, should;work~as well")
-    ["this, should", "work", "as well"]
-    """
-    args = (maxsplit,) if maxsplit is not None else ()
-    if "|" in split_string:
-        return SPLIT_REGEX.split(split_string, *args)
-    if "~" in split_string:
-        return EASIER_SPLIT_REGEX.split(split_string, *args)
-    if ";" in split_string:
-        return EASIER_SPLIT_REGEX.split(split_string, *args)
     return
 
 

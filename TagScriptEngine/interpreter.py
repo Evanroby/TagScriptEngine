@@ -416,11 +416,11 @@ class Interpreter(_Interpreter):
 
 class AsyncInterpreter(Interpreter):
     """
-    An asynchronous subclass of `Interpreter` that allows blocks to implement asynchronous methods.
+    An asynchronous subclass of :class:`Interpreter` that allows blocks to implement asynchronous methods.
     Synchronous blocks are still supported.
 
-    This subclass has no additional attributes from the `Interpreter` class.
-    See `Interpreter` for full documentation.
+    This subclass has no additional attributes from the :class:`Interpreter` class.
+    See :class:`Interpreter` for full documentation.
     """
 
     async def _get_acceptors(self, ctx: Context) -> List[Block]:  # type: ignore
@@ -482,8 +482,8 @@ class AsyncInterpreter(Interpreter):
         """
         Asynchronously process a given TagScript string.
 
-        This method has no additional attributes from the `Interpreter` class.
-        See `Interpreter.process` for full documentation.
+        This method has no additional attributes from the :class:`Interpreter` class.
+        See :meth:`Interpreter.process` for full documentation.
         """
         response = Response(variables=seed_variables, extra_kwargs=kwargs)
         node_ordered_list = build_node_tree(message)

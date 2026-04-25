@@ -16,7 +16,7 @@ from pyparsing import (
     ZeroOrMore,
     alphas,
     nums,
-    oneOf,
+    one_of,
 )
 
 from ..interface import Block
@@ -77,20 +77,20 @@ class NumericStringParser(object):
         expr: Forward = Forward()
         atom: ParserElement = (
             (
-                Optional(oneOf("- +"))
-                + (ident + lpar + expr + rpar | pi | e | fnumber).setParseAction(self.pushFirst)
+                Optional(one_of("- +"))
+                + (ident + lpar + expr + rpar | pi | e | fnumber).set_parse_action(self.pushFirst)
             )
-            | Optional(oneOf("- +")) + Group(lpar + expr + rpar)
-        ).setParseAction(self.pushUMinus)
+            | Optional(one_of("- +")) + Group(lpar + expr + rpar)
+        ).set_parse_action(self.pushUMinus)
         # by defining exponentiation as "atom [ ^ factor ]..." instead of
         # "atom [ ^ atom ]...", we get right-to-left exponents, instead of left-to-right
         # that is, 2^3^2 = 2^(3^2), not (2^3)^2.
         factor: Forward = Forward()
-        factor << atom + ZeroOrMore((expop + factor).setParseAction(self.pushFirst))  # type: ignore
-        term: ParserElement = factor + ZeroOrMore((multop + factor).setParseAction(self.pushFirst))
-        expr << term + ZeroOrMore((addop + term).setParseAction(self.pushFirst))  # type: ignore
-        final: ParserElement = expr + ZeroOrMore((iop + expr).setParseAction(self.pushFirst))
-        # addop_term = ( addop + term ).setParseAction( self.pushFirst )
+        factor << atom + ZeroOrMore((expop + factor).set_parse_action(self.pushFirst))  # type: ignore
+        term: ParserElement = factor + ZeroOrMore((multop + factor).set_parse_action(self.pushFirst))
+        expr << term + ZeroOrMore((addop + term).set_parse_action(self.pushFirst))  # type: ignore
+        final: ParserElement = expr + ZeroOrMore((iop + expr).set_parse_action(self.pushFirst))
+        # addop_term = ( addop + term ).set_parse_action( self.pushFirst )
         # general_term = term + ZeroOrMore( addop_term ) | OneOrMore( addop_term)
         # expr <<  general_term
         self.bnf: ParserElement = final
@@ -145,9 +145,9 @@ class NumericStringParser(object):
         else:
             return float(op)
 
-    def eval(self, num_string: str, parseAll: bool = True) -> Any:
+    def eval(self, num_string: str, parse_all: bool = True) -> Any:
         self.exprStack = []
-        results = self.bnf.parseString(num_string, parseAll)  # noqa: F841
+        results = self.bnf.parse_string(num_string, parse_all)  # noqa: F841
         return self.evaluateStack(self.exprStack[:])
 
 
@@ -155,6 +155,71 @@ NSP: NumericStringParser = NumericStringParser()
 
 
 class MathBlock(Block):
+    """
+    The math block performs mathematical calculations from the given payload expression.
+
+    Supports standard arithmetic operators, exponentiation, modulo, in-place operators,
+    mathematical functions, and constants.
+
+    **Supported Operators:**
+
+    +----------+---------------------+
+    | Operator | Description         |
+    +==========+=====================+
+    | ``+``    | Addition            |
+    +----------+---------------------+
+    | ``-``    | Subtraction         |
+    +----------+---------------------+
+    | ``*``    | Multiplication      |
+    +----------+---------------------+
+    | ``/``    | Division            |
+    +----------+---------------------+
+    | ``^``    | Exponentiation      |
+    +----------+---------------------+
+    | ``%``    | Modulo              |
+    +----------+---------------------+
+    | ``+=``   | In-place addition   |
+    +----------+---------------------+
+    | ``-=``   | In-place subtraction|
+    +----------+---------------------+
+    | ``*=``   | In-place multiply   |
+    +----------+---------------------+
+    | ``/=``   | In-place division   |
+    +----------+---------------------+
+
+    **Supported Functions:**
+    ``sin``, ``cos``, ``tan``, ``sinh``, ``cosh``, ``tanh``,
+    ``exp``, ``abs``, ``trunc``, ``round``, ``sgn``,
+    ``log`` (base 10), ``ln`` (natural), ``log2``, ``sqrt``
+
+    **Constants:** ``PI``, ``E``
+
+    **Usage:** ``{math:<expression>}``
+
+    **Aliases:** ``m, +, calc``
+
+    **Payload:** expression
+
+    **Parameter:** None
+
+    **Examples:** ::
+
+        {math:2+3}
+        # 5
+
+        {m:round(7/3)}
+        # 2
+
+        {calc:sin(PI/2)}
+        # 1.0
+
+        {+:7*6}
+        # 42
+
+        {m:sqrt(144)}
+        # 12.0
+    """
+
     ACCEPTED_NAMES: Tuple[str, ...] = ("math", "m", "+", "calc")
 
     def process(self, ctx: Context) -> TypingOptional[str]:

@@ -45,10 +45,38 @@ Command Block
 .. autoclass:: TagScriptEngine.block.CommandBlock
 
 --------------
+Contains Block
+--------------
+
+The ``contains`` block strictly checks if the parameter is in the payload,
+split by whitespace. This performs **exact** matching on whitespace-split words.
+
+**Usage:** ``{contains(<string>):<payload>}``
+
+**Examples:** ::
+
+    {contains(mute):How does it feel to be muted?}
+    # false
+    {contains(muted?):How does it feel to be muted?}
+    # true
+
+-----------
+Count Block
+-----------
+
+.. autoclass:: TagScriptEngine.block.CountBlock
+
+--------------
 Cooldown Block
 --------------
 
 .. autoclass:: TagScriptEngine.block.CooldownBlock
+
+-----------
+Cycle Block
+-----------
+
+.. autoclass:: TagScriptEngine.block.CycleBlock
 
 -----------
 Embed Block
@@ -68,17 +96,78 @@ If Block
 
 .. autoclass:: TagScriptEngine.block.IfBlock
 
+--------
+In Block
+--------
+
+The ``in`` block checks if the parameter string is anywhere in the payload as a substring.
+
+**Usage:** ``{in(<string>):<payload>}``
+
+**Examples:** ::
+
+    {in(apple pie):banana pie apple pie and other pie}
+    # true
+    {in(mute):How does it feel to be muted?}
+    # true
+
+-----------
+Index Block
+-----------
+
+The ``index`` block finds the location/index of the parameter in the payload,
+split by whitespace. Returns ``-1`` if not found. Performs **exact** matching.
+
+**Usage:** ``{index(<string>):<payload>}``
+
+**Examples:** ::
+
+    {index(food):I love to eat food everyone does}
+    # 4
+    {index(pie):I love to eat food}
+    # -1
+
+----------
+Join Block
+----------
+
+.. autoclass:: TagScriptEngine.block.JoinBlock
+
+------------
+Length Block
+------------
+
+.. autoclass:: TagScriptEngine.block.LengthBlock
+
+----------
+List Block
+----------
+
+.. autoclass:: TagScriptEngine.block.ListBlock
+
 --------------------
 Loose Variable Block
 --------------------
 
 .. autoclass:: TagScriptEngine.block.LooseVariableGetterBlock
 
+-----------
+Lower Block
+-----------
+
+.. autoclass:: TagScriptEngine.block.LowerBlock
+
 ----------
 Math Block
 ----------
 
 .. autoclass:: TagScriptEngine.block.MathBlock
+
+-------------
+Ordinal Block
+-------------
+
+.. autoclass:: TagScriptEngine.block.OrdinalBlock
 
 --------------
 Override Block
@@ -128,6 +217,12 @@ STRF Block
 
 .. autoclass:: TagScriptEngine.block.StrfBlock
 
+----------
+Stop Block
+----------
+
+.. autoclass:: TagScriptEngine.block.StopBlock
+
 ---------------------
 Strict Variable Block
 ---------------------
@@ -151,39 +246,3 @@ Upper Block
 -----------
 
 .. autoclass:: TagScriptEngine.block.UpperBlock
-
------------
-Lower Block
------------
-
-.. autoclass:: TagScriptEngine.block.LowerBlock
-
------------
-Count Block
------------
-
-.. autoclass:: TagScriptEngine.block.CountBlock
-
-------------
-Length Block
-------------
-
-.. autoclass:: TagScriptEngine.block.LengthBlock
-
-----------
-Stop Block
-----------
-
-.. autoclass:: TagScriptEngine.block.StopBlock
-
---------------
-Python Block
---------------
-
-.. autoclass:: TagScriptEngine.block.PythonBlock
-
-----------
-Join Block
-----------
-
-.. autoclass:: TagScriptEngine.block.JoinBlock

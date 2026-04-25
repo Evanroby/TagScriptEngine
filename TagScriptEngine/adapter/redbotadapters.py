@@ -103,7 +103,7 @@ class RedBotAdapter(SimpleAdapter["Red"]):
         Percentage of chunked guilds the bot has.
 
     .. warning::
-        Attributes denoting `(*)` can only be used by the bot owner.
+        Attributes denoting ``(*)`` can only be used by the bot owner.
     """
 
     if not _has_redbot:

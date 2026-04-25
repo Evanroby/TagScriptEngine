@@ -11,6 +11,7 @@ Welcome to TagScript's documentation!
    :caption: User Guide
 
    user_blocks
+   install
 
 .. toctree::
    :maxdepth: 2

@@ -8,7 +8,6 @@ from .helpers import (
     helper_parse_if as helper_parse_if,
     helper_parse_list_if as helper_parse_list_if,
     helper_split as helper_split,
-    easier_helper_split as easier_helper_split,
 )
 
 # isort: on
@@ -92,13 +91,21 @@ from .count import (
 from .joinblock import (
     JoinBlock as JoinBlock,
 )
+from .listblock import (
+    ListBlock as ListBlock,
+)
+from .cycleblock import (
+    CycleBlock as CycleBlock,
+)
+from .ordblock import (
+    OrdinalBlock as OrdinalBlock,
+)
 
 __all__: Tuple[str, ...] = (
     "implicit_bool",
     "helper_parse_if",
     "helper_parse_list_if",
     "helper_split",
-    "easier_helper_split",
     "AllowedMentionsBlock",
     "AllBlock",
     "AnyBlock",
@@ -131,4 +138,7 @@ __all__: Tuple[str, ...] = (
     "CountBlock",
     "LengthBlock",
     "JoinBlock",
+    "ListBlock",
+    "CycleBlock",
+    "OrdinalBlock",
 )

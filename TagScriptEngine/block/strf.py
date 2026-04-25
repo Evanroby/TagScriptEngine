@@ -16,7 +16,7 @@ class StrfBlock(Block):
     Two types of timestamps are supported: ISO and epoch.
     If a timestamp isn't passed, the current UTC time is used.
 
-    Invoking this block with ``unix`` will return the current Unix timestamp.
+    Invoking this block with :ref:`unix` will return the current Unix timestamp.
 
     **Usage:** ``{strf([timestamp]):<format>}``
 

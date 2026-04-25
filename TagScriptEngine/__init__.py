@@ -24,7 +24,6 @@ from .block import (
     helper_parse_if as helper_parse_if,
     helper_parse_list_if as helper_parse_list_if,
     helper_split as helper_split,
-    easier_helper_split as easier_helper_split,
     AllowedMentionsBlock as AllowedMentionsBlock,
     AllBlock as AllBlock,
     AnyBlock as AnyBlock,
@@ -57,6 +56,9 @@ from .block import (
     LengthBlock as LengthBlock,
     CooldownBlock as CooldownBlock,
     JoinBlock as JoinBlock,
+    ListBlock as ListBlock,
+    CycleBlock as CycleBlock,
+    OrdinalBlock as OrdinalBlock,
 
 )
 from .interface import (
@@ -100,7 +102,6 @@ __all__: Tuple[str, ...] = (
     "helper_parse_if",
     "helper_parse_list_if",
     "helper_split",
-    "easier_helper_split",
     "AllowedMentionsBlock",
     "AllBlock",
     "AnyBlock",
@@ -133,6 +134,9 @@ __all__: Tuple[str, ...] = (
     "CountBlock",
     "LengthBlock",
     "JoinBlock",
+    "ListBlock",
+    "CycleBlock",
+    "OrdinalBlock",
 
     "SafeObjectAdapter",
     "StringAdapter",
@@ -177,7 +181,7 @@ __all__: Tuple[str, ...] = (
 )
 
 
-__version__: Final[str] = "3.2.5"
+__version__: Final[str] = "3.3.0"
 
 
 class VersionNamedTuple(NamedTuple):

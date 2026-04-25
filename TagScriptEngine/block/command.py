@@ -114,7 +114,7 @@ class SequentialGather(Awaitable[T]):
 
     Returns
     -------
-    `List[T]`
+    ``List[T]``
         the result object.
     """
 

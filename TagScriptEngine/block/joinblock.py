@@ -33,8 +33,8 @@ class JoinBlock(verb_required_block(False, payload=True, parameter=True)):  # ty
         {join():an example sentence}
         # anexamplesentence
 
-        {join(-):one two three}
-        # one-two-three
+        {join(-):cool aid man}
+        # cool-aid-man
     """
 
     ACCEPTED_NAMES: Tuple[str, ...] = ("join",)

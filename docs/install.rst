@@ -17,7 +17,7 @@ pip
 
     $ pip install AdvancedTagScript
 
-Latest version of `AdvancedTagScript` supports only python3.
+Latest version of ``AdvancedTagScript`` supports only python3.
 
 
 Source
