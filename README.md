@@ -61,4 +61,3 @@ use.
 
 `discord.py`
 
-`Red-DiscordBot` [optional]

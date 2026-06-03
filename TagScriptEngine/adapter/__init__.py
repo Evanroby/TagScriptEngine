@@ -22,10 +22,6 @@ from .intadapter import (
 from .objectadapter import (
     SafeObjectAdapter as SafeObjectAdapter,
 )
-from .redbotadapters import (
-    RedCommandAdapter as RedCommandAdapter,
-    RedBotAdapter as RedBotAdapter,
-)
 from .stringadapter import (
     StringAdapter as StringAdapter,
 )
@@ -45,6 +41,4 @@ __all__: Tuple[str, ...] = (
     "GuildAdapter",
     "RoleAdapter",
     "DiscordObjectAdapter",
-    "RedCommandAdapter",
-    "RedBotAdapter",
 )

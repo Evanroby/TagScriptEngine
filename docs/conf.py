@@ -69,7 +69,7 @@ html_static_path = ["_static"]
 # autodoc
 autodoc_default_options = {"show-inheritance": True}
 autodoc_member_order = "bysource"
-autodoc_mock_imports = ["redbot", "redbot.core", "redbot.core.bot", "redbot.core.commands", "redbot.core.utils.chat_formatting"]
+autodoc_mock_imports = []
 
 # simple references within backticks
 default_role = "any"

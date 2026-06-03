@@ -16,8 +16,6 @@ from .adapter import (
     RoleAdapter as RoleAdapter,
     AttributeAdapter as AttributeAdapter,
     DiscordObjectAdapter as DiscordObjectAdapter,
-    RedCommandAdapter as RedCommandAdapter,
-    RedBotAdapter as RedBotAdapter,
 )
 from .block import (
     implicit_bool as implicit_bool,
@@ -142,8 +140,6 @@ __all__: Tuple[str, ...] = (
     "StringAdapter",
     "IntAdapter",
     "FunctionAdapter",
-    "RedCommandAdapter",
-    "RedBotAdapter",
     "AttributeAdapter",
     "DiscordAttributeAdapter",
     "UserAdapter",
